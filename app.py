@@ -26,12 +26,13 @@ def get_json():
         text = json.loads(text)
         num = schema_number()
         save_schema(json.dumps(text, indent=4), num + 1)
+        man, sq = get_mandatory_req_fields(text)
         return redirect('/get_input')
     else:
         return redirect('/error')
     
 @app.route('/get_input', methods=['POST'])
-def inp():
+def get_inp():
     if request.method == 'POST':
         # names = request.form.getlist('type-name')
         # for name, types in zip(names, typess):
@@ -39,6 +40,7 @@ def inp():
 
         types = request.form['types']
         data = open_schema(str(types))
+        man, sq = get_mandatory_req_fields(data)
         return redirect('/get_input')
     else:
         return redirect('/error')

@@ -1,0 +1,29 @@
+{
+    "StudentDetails": [{
+        "name": "John",
+        "marks": [{
+            "maths": [{
+                "statists": 70,
+                "algebra": 80
+            }],
+            "English": [{
+                "grammar": 90,
+                "other": [{
+                    "speech": "80%"
+                }]
+            }]
+        }]
+    },
+        {
+        "name": "Teena",
+        "marks": [{}]
+    },
+        {
+        "name": "Roy",
+        "marks": [{
+            "English": [{
+                "grammar": 90
+            }]
+        }]
+    }]
+}

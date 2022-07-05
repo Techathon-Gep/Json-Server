@@ -24,14 +24,14 @@ def hello():
 def error():
     return render_template("error.html")
 
-@app.route('/get_input')
+@app.route('/data_input')
 def get_input():
     return render_template("form.html")
 
 @app.route('/get_json', methods=['POST'])
 def get_json():
     if request.method == 'POST':
-        text = request.form['schema_input']
+        text = request.form['json_input']
 
         jsons = json.loads(text)
         num = schema_number()
@@ -59,7 +59,23 @@ def get_inp():
         sp_req = reqcheck("root", data)
         session['sp_req'] = sp_req
         # print("asdahelkkikkkerakrkaek", mandatory, session['sp_req'], flush=True)
-        return redirect('/get_input')
+        return redirect('/data_input')
+    else:
+        return redirect('/error')
+
+@app.route('/get_data', methods=['POST'])
+def temp():
+    if request.method == 'POST':
+
+        types = request.form['schema_input']
+        # print("dasdasda", types, flush=True)
+        data = json.loads(types)
+        mandatory = schemacheck("root", data)
+        session['mandatory'] = mandatory
+        sp_req = reqcheck("root", data)
+        session['sp_req'] = sp_req
+        # print("asdahelkkikkkerakrkaek", mandatory, session['sp_req'], flush=True)
+        return redirect('/data_input')
     else:
         return redirect('/error')
 

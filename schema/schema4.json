@@ -30,7 +30,7 @@
                                                             "maximum" : 100
                                                         },
                                                         "algebra": {
-                                                            "type": "string"
+                                                            "type": "number"
                                                         }
                                                     },
                                                     "required": [
@@ -48,7 +48,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "grammar": {
-                                                            "type": "string"
+                                                            "type": "number"
                                                         },
                                                         "other": {
                                                             "type": "array",
@@ -128,7 +128,7 @@
                                                     "type": "object",
                                                     "properties": {
                                                         "grammar": {
-                                                            "type": "string"
+                                                            "type": "number"
                                                         }
                                                     },
                                                     "required": [

@@ -17,7 +17,7 @@
             },
 
             "marks": {
-              "type": "array",
+              "type": "number",
 
               "items": [
                 {
@@ -33,11 +33,11 @@
 
                           "properties": {
                             "statists": {
-                              "type": "string"
+                              "type": "number"
                             },
 
                             "algebra": {
-                              "type": "string"
+                              "type": "number"
                             }
                           },
 
@@ -55,7 +55,7 @@
 
                           "properties": {
                             "grammar": {
-                              "type": "string"
+                              "type": "number"
                             },
 
                             "other": {
@@ -139,7 +139,7 @@
 
                           "properties": {
                             "grammar": {
-                              "type": "string"
+                              "type": "number"
                             }
                           },
 

@@ -1,4 +1,5 @@
 from flask import Flask, render_template, redirect, request, jsonify, session
+from flask_session import Session
 from utils import save_schema, open_schema, schema_number, schema_names, get_mandatory_req_fields
 import json
 # from constants import jsons, sp_req, mandatory
@@ -7,9 +8,11 @@ from jsonSchema.JSONSchema.newschema import schemacheck, reqcheck
 
 jsons = {}
 data = {}
-# sp_req = {}
-# mandatory = {}
+
 app = Flask(__name__)
+app.config["SESSION_PERMANENT"] = False
+app.config["SESSION_TYPE"] = "filesystem"
+Session(app)
 
 
 @app.route('/')
@@ -25,21 +28,6 @@ def error():
 def get_input():
     return render_template("form.html")
 
-    
-@app.route('/get_input', methods=['POST'])
-def get_inp():
-    if request.method == 'POST':
-
-        types = request.form['types']
-        data = open_schema(str(types))
-        # global mandatory, sp_req
-        session['mandatory'] = schemacheck("root", data)
-        session['sp_req'] = reqcheck("root", data)
-        print("asdahelkkikkkerakrkaek", session['mandatory'], session['sp_req'], flush=True)
-        return redirect('/get_input')
-    else:
-        return redirect('/error')
-
 @app.route('/get_json', methods=['POST'])
 def get_json():
     if request.method == 'POST':
@@ -50,12 +38,30 @@ def get_json():
 
         mandatory = session.get('mandatory')
         sp_req = session.get('sp_req')
-        print("dsaasdasdasdadas", sp_req, mandatory, flush=True)
+        # print("dsaasdasdasdadas", sp_req, mandatory, flush=True)
         # print(data)
-        out = output(jsons, sp_req, mandatory)
+        input_data = {}
+        input_data['root'] = jsons
+        out = output([], input_data, sp_req, mandatory)
         return jsonify(out)
     else:
         return redirect('/error')
+    
+@app.route('/get_input', methods=['POST'])
+def get_inp():
+    if request.method == 'POST':
+
+        types = request.form['types']
+        data = open_schema(str(types))
+        mandatory = schemacheck("root", data)
+        session['mandatory'] = mandatory
+        sp_req = reqcheck("root", data)
+        session['sp_req'] = sp_req
+        # print("asdahelkkikkkerakrkaek", mandatory, session['sp_req'], flush=True)
+        return redirect('/get_input')
+    else:
+        return redirect('/error')
+
 
 if __name__ == "__main__":
     app.run(port=4000, debug = True)

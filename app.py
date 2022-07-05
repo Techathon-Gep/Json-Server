@@ -43,7 +43,8 @@ def get_json():
         input_data = {}
         input_data['root'] = jsons
         out = output([], input_data, sp_req, mandatory)
-        return jsonify(out)
+        session['out'] = out
+        return redirect('/results')
     else:
         return redirect('/error')
     
@@ -61,6 +62,11 @@ def get_inp():
         return redirect('/get_input')
     else:
         return redirect('/error')
+
+@app.route('/results')
+def result():
+    output = session.get('out')
+    return render_template('result.html', output = output)
 
 
 if __name__ == "__main__":

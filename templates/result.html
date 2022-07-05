@@ -1,12 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous" />
 </head>
+
 <body>
-    
+    <!-- <table>
+        <th>
+            <tr>Heading</tr>
+        </th>
+        <tbody>
+            <td>Body</td>
+        </tbody>
+    </table> -->
+    <div style="text-align: center; margin-top: 10px;">
+        <table class="table" style="background-color: rgb(88, 166, 250);width:80%;margin: auto;">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Error Message</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for out in output %}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>{{ out }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
+
 </html>

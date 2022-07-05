@@ -55,8 +55,8 @@ def output(error, jsons, sp_req, mandatory):
     # print("isnsdiasidasidasidaids",jsons, flush=True)
     for key in jsons.keys():
         validateNode(error, sp_req, mandatory, key, jsons[key])
-    print(error, "sdaasdasdasdadadasdas")
+    # print(error, "sdaasdasdasdadadasdas")
     if len(error) > 0:
         return error
     else:
-        return "validated"
+        return ["No error found json data validated"]

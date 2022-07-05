@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="/get_input" method="post">
+        <label for="type-name">Input Name:</label>
+        <input type="text" name="type-name" id="type-name">
+        <select name="types" id="types">
+            <option value="{{ options[0] }}"> {{ options[0] }} </option>
+            {% for op in options[1:] %}
+            <option value="{{ op }}">{{ op }}</option>
+            {% endfor %}
+        </select>
+        <button class=".btn-add">Add+</button>
+        <input type="submit">
+    </form>
+
+    <script>
+        document.querySelector('.btn-add')
+        .addEventListener('click', (e)=>{
+            e.preventDefault();
+            let body = document.querySelector('body');
+        })
+    </script>
+</body>
+</html>

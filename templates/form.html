@@ -4,22 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
     <title>Document</title>
 </head>
-<body>
-    <div class="form">
-        <form action="/get_json" method="post">
-            <label for="json_input">JSON Data:</label>
-            <textarea name="json_input" id="json_input" cols="30" rows="10" placeholder="Input JSON Schema...">
+<body style="background-color: #122c91;">
+    <div class = "container px-10 pb-3 pt-5">
+        <div class = "rounded-lg" style="background-color: #48d6d2">
+    <div class="form py-5">
+        <form class = "pl-20 place-content-center" action="/get_json" method="post">
+            <label class ="pr-3" for="json_input">JSON Data:</label>
+            <textarea class="pl-5" name="json_input" id="json_input" cols="30" rows="10" placeholder="Input JSON Data...">
             </textarea>
-            <input type="submit">
+            <input class = "ml-1 px-3 py-1 font-bold rounded-full" style="background-color:#36b372;" type="submit">
         </form>
     </div>
-
-    <div>
+</div>
+</div>
+    <div class = "container px-10 pb-3">
+        <div class = "rounded-lg" style="background-color: #48d6d2">
         <pre>
+            <div class="font-extrabold">
+                Input Schema
+            </div>
             {{ data }}
         </pre>
+    </div>
     </div>
 </body>
 </html>

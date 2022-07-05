@@ -26,7 +26,8 @@ def error():
 
 @app.route('/data_input')
 def get_input():
-    return render_template("form.html")
+    data = session.get('schema')
+    return render_template("form.html", data = data)
 
 @app.route('/get_json', methods=['POST'])
 def get_json():
@@ -58,6 +59,7 @@ def get_inp():
         session['mandatory'] = mandatory
         sp_req = reqcheck("root", data)
         session['sp_req'] = sp_req
+        session['schema'] = json.dumps(data, indent=4)
         # print("asdahelkkikkkerakrkaek", mandatory, session['sp_req'], flush=True)
         return redirect('/data_input')
     else:
@@ -70,6 +72,7 @@ def temp():
         types = request.form['schema_input']
         # print("dasdasda", types, flush=True)
         data = json.loads(types)
+        session['schema'] = json.dumps(data, indent=4)
         mandatory = schemacheck("root", data)
         session['mandatory'] = mandatory
         sp_req = reqcheck("root", data)

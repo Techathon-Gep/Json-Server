@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+
+  "type": "object",
+
+  "properties": {
+    "StudentDetails": {
+      "type": "array",
+
+      "items": [
+        {
+          "type": "object",
+
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+
+            "marks": {
+              "type": "array",
+
+              "items": [
+                {
+                  "type": "object",
+
+                  "properties": {
+                    "maths": {
+                      "type": "array",
+
+                      "items": [
+                        {
+                          "type": "object",
+
+                          "properties": {
+                            "statists": {
+                              "type": "string"
+                            },
+
+                            "algebra": {
+                              "type": "string"
+                            }
+                          },
+
+                          "required": ["statists", "algebra"]
+                        }
+                      ]
+                    },
+
+                    "English": {
+                      "type": "array",
+
+                      "items": [
+                        {
+                          "type": "object",
+
+                          "properties": {
+                            "grammar": {
+                              "type": "string"
+                            },
+
+                            "other": {
+                              "type": "array",
+
+                              "items": [
+                                {
+                                  "type": "object",
+
+                                  "properties": {
+                                    "speech": {
+                                      "type": "string"
+                                    }
+                                  },
+
+                                  "required": ["speech"]
+                                }
+                              ]
+                            }
+                          },
+
+                          "required": ["grammar", "other"]
+                        }
+                      ]
+                    }
+                  },
+
+                  "required": ["maths", "English"]
+                }
+              ]
+            }
+          },
+
+          "required": ["name", "marks"]
+        },
+
+        {
+          "type": "object",
+
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+
+            "marks": {
+              "type": "array",
+
+              "items": [
+                {
+                  "type": "object"
+                }
+              ]
+            }
+          },
+
+          "required": ["name", "marks"]
+        },
+
+        {
+          "type": "object",
+
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+
+            "marks": {
+              "type": "array",
+
+              "items": [
+                {
+                  "type": "object",
+
+                  "properties": {
+                    "English": {
+                      "type": "array",
+
+                      "items": [
+                        {
+                          "type": "object",
+
+                          "properties": {
+                            "grammar": {
+                              "type": "string"
+                            }
+                          },
+
+                          "required": ["grammar"]
+                        }
+                      ]
+                    }
+                  },
+
+                  "required": ["English"]
+                }
+              ]
+            }
+          },
+
+          "required": ["name", "marks"]
+        }
+      ]
+    }
+  },
+
+  "required": ["StudentDetails"]
+}

@@ -1,5 +1,4 @@
-mandatory = {}
-sp_req = {}
+from constants import sp_req, mandatory
 
 def schemacheck(name,node):
     if node["type"] == "object":

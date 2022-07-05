@@ -1,5 +1,15 @@
-def validateNode(node, child):
-  print(f"Node: {node}\nChild: {child}\n", end="="*100+"\n")
+error = []
+# json = {"StudentInfo": [{"name": "John","age": 25,"city": "US"},{"name": "Jh","age": 125,"city": 123,"gender": "F"},{"name": None,"age": "12","city": "US","gender": "T"}]}
+# mandatory = {"StudentInfo": ["name", "gender"]}
+# sp_req = {"name": {"maxlen": 8, "minlen": 3}, "age": {"max": 100, "min": 0}, "gender": ["F", "M", "N"], "city": str, 'StudentInfo': {'minItems': 3}}
+
+from constants import jsons, sp_req, mandatory
+import sys
+
+def validateNode(sp_req, mandatory, node, child):
+  print(sp_req, mandatory, flush=True)
+  print(f"Node: {node}\nChild: {child}\n", end="="*100+"\n", flush=True)
+
   if type(child) is list:
     if node in sp_req.keys():
       if "minItems" in sp_req[node].keys() and len(child) < sp_req[node]["minItems"]:
@@ -7,14 +17,14 @@ def validateNode(node, child):
       elif "maxItems" in sp_req[node].keys() and len(child) > sp_req[node]["maxItems"]:
         error.append(f"Length of the node: '{node}' is more.")
     for i in range(0, len(child)):
-      validateNode(node, child[i])
+      validateNode(sp_req, mandatory, node, child[i])
   elif type(child) is dict:
     if node in mandatory.keys():
       for i in mandatory[node]:
         if i not in child.keys():
           error.append(f"Mandatory Node '{i}' is not present in {node}")
     for i in child.keys():
-      validateNode(i, child[i])
+      validateNode(sp_req, mandatory, i, child[i])
   else:
     if node in sp_req.keys():
       if child is None:
@@ -30,12 +40,24 @@ def validateNode(node, child):
             error.append(f"Child: '{child}' of node: '{node}' exceeded the maximum length.")
           elif "minlen" in sp_req[node].keys() and len(child) < sp_req[node]["minlen"]:
             error.append(f"Child: '{child}' of node: '{node}' is shorter in length.")
-        elif ("max" or "min") in sp_req[node].keys():
+        elif ("maximum" or "minimum") in sp_req[node].keys():
           if type(child) is not int:
             error.append(f"Child: '{child}' of node: '{node}' should be an integer")
-          elif "max" in sp_req[node].keys() and child > sp_req[node]["max"]:
+          elif "maximum" in sp_req[node].keys() and child > sp_req[node]["maximum"]:
             error.append(f"Child: '{child}' of node: '{node}' crosses the upper limit.")
-          elif "min" in sp_req[node].keys() and child < sp_req[node]["min"]:
+          elif "minimum" in sp_req[node].keys() and child < sp_req[node]["minimum"]:
             error.append(f"Child: '{child}' of node: '{node}' not able to cross the lower limit.")
       elif type(child) is not sp_req[node]:
         error.append(f"Value of '{node}' should be an '{sp_req[node]}'")
+
+
+def output(jsons, sp_req, mandatory):
+    print(sp_req, mandatory, flush=True)
+    print("isnsdiasidasidasidaids",jsons, flush=True)
+    for key in jsons.keys():
+        validateNode(sp_req, mandatory, key, jsons[key])
+    print(error, "sdaasdasdasdadadasdas")
+    if len(error) > 0:
+        return error
+    else:
+        return "validated"

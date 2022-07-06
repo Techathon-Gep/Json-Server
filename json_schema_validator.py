@@ -32,7 +32,9 @@ def validateNode(error, sp_req, mandatory, node, child):
         if child not in sp_req[node]:
           error.append(f"Child: '{child}' of node: '{node}' value is not the required one.")
       elif type(sp_req[node]) is dict:
-        if ("maxLength" or "minLength") in sp_req[node].keys():
+        if 'type' in sp_req[node] and type(child) is not sp_req[node]['type']:
+          error.append(f"Value of '{node}' should be an '{sp_req[node]}'")
+        elif ("maxLength" or "minLength") in sp_req[node].keys():
           if type(child) is not str:
             error.append(f"Child: '{child}' of node: '{node}' should be a string")
           elif "maxLength" in sp_req[node].keys() and len(child) > sp_req[node]["maxLength"]:
@@ -49,8 +51,6 @@ def validateNode(error, sp_req, mandatory, node, child):
         elif "enum" in sp_req[node].keys():
           if child not in sp_req[node]["enum"]:
             error.append(f"Child: '{child}' of node: '{node}' value is not the required one.")
-      elif type(child) is not sp_req[node]:
-        error.append(f"Value of '{node}' should be an '{sp_req[node]}'")
 
 
 def output(error, jsons, sp_req, mandatory):

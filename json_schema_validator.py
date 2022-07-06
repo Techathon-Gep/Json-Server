@@ -46,6 +46,9 @@ def validateNode(error, sp_req, mandatory, node, child):
             error.append(f"Child: '{child}' of node: '{node}' crosses the upper limit.")
           elif "minimum" in sp_req[node].keys() and child < sp_req[node]["minimum"]:
             error.append(f"Child: '{child}' of node: '{node}' not able to cross the lower limit.")
+        elif "enum" in sp_req[node].keys():
+          if child not in sp_req[node]["enum"]:
+            error.append(f"Child: '{child}' of node: '{node}' value is not the required one.")
       elif type(child) is not sp_req[node]:
         error.append(f"Value of '{node}' should be an '{sp_req[node]}'")
 

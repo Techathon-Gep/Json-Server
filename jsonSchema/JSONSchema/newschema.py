@@ -1,5 +1,20 @@
 from constants import sp_req, mandatory
 
+
+def typeof(i):
+    if i == "object":
+        s = dict
+    elif i == "array":
+        s = list
+    elif i == "integer":
+        s = int
+    elif i == "number":
+        s = float
+    elif i == "string":
+        s = str
+    
+    return s
+
 def schemacheck(name,node):
     if node["type"] == "object":
         mandatory[name] = node["required"]
@@ -49,6 +64,13 @@ def reqcheck(name,node):
                 for i in range(len(value)):
                     reqcheck(name,value[i])
     elif node["type"] in ["number","integer"]:
+        temp = {}
+        if name not in sp_req.keys():
+            temp["type"] = typeof(node["type"])
+        else:
+            temp = sp_req[name]
+            temp["type"] = typeof(node["type"])
+        sp_req[name] = temp
         if "maximum" in node.keys():
             temp = {}
             if name not in sp_req.keys():
@@ -66,6 +88,13 @@ def reqcheck(name,node):
                 temp["minimum"] = node["minimum"]
             sp_req[name] = temp
     elif node["type"] == "string":
+        temp = {}
+        if name not in sp_req.keys():
+            temp["type"] = typeof(node["type"])
+        else:
+            temp = sp_req[name]
+            temp["type"] = typeof(node["type"])
+        sp_req[name] = temp
         if "maxLength" in node.keys():
             temp = {}
             if name not in sp_req.keys():
